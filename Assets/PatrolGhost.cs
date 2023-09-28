@@ -2,12 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Patrol : MonoBehaviour
+public class PatrolGhost : MonoBehaviour
 {
+    Patroller PatrolClass;
+
     public UnityEngine.AI.NavMeshAgent agent;
- 
+
+    UnityEngine.AI.NavMeshAgent patrolagent;
+    
     GameObject targetObj;
-   
+    
+    GameObject patroller;
+
     GameObject GObjA;
     GameObject GObjB;
     GameObject GObjC;
@@ -15,7 +21,7 @@ public class Patrol : MonoBehaviour
 
     int sense;
     int targetNum;
-
+    float d;
     void changeTarget()
     {
         switch (targetNum)
@@ -34,13 +40,16 @@ public class Patrol : MonoBehaviour
                 break;
         }
     }
-
     void Start()
     {
+        patrolagent = PatrolClass.agent;
+
         GObjA = GameObject.Find("WP A");
         GObjB = GameObject.Find("WP B");
         GObjC = GameObject.Find("WP C");
         GObjD = GameObject.Find("WP D");
+
+        patroller = GameObject.Find("Patroller");
 
         targetNum = Random.Range(0, 4);
         sense = Random.Range(0, 2);
@@ -53,6 +62,17 @@ public class Patrol : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        patrolagent.remainingDistance;
+
+        if (d > 1.0f)
+        {
+            agent.isStopped = true;
+        }
+        if (d < 1.0f)
+        {
+            agent.isStopped = false;
+        }
+
         if (agent.remainingDistance < 0.3f)
         {
             switch (sense)
