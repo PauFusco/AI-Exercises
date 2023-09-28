@@ -8,18 +8,16 @@ public class Patrol : MonoBehaviour
  
     GameObject targetObj;
    
+    GameObject GObjA;
+    GameObject GObjB;
+    GameObject GObjC;
+    GameObject GObjD;
+
     int sense;
+    int targetNum;
 
-    void Start()
+    void changeTarget()
     {
-        var GObjA = GameObject.Find("WP A");
-        var GObjB = GameObject.Find("WP B");
-        var GObjC = GameObject.Find("WP C");
-        var GObjD = GameObject.Find("WP D");
-
-        var targetNum = Random.Range(0, 3);
-        sense = Random.Range(0, 1);
-
         switch (targetNum)
         {
             case 0:
@@ -35,6 +33,19 @@ public class Patrol : MonoBehaviour
                 targetObj = GObjD;
                 break;
         }
+    }
+
+    void Start()
+    {
+        GObjA = GameObject.Find("WP A");
+        GObjB = GameObject.Find("WP B");
+        GObjC = GameObject.Find("WP C");
+        GObjD = GameObject.Find("WP D");
+
+        targetNum = Random.Range(0, 4);
+        sense = Random.Range(0, 2);
+
+        changeTarget();
 
         agent.destination = targetObj.transform.position;
     }
@@ -42,26 +53,30 @@ public class Patrol : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // use objects as targets and alternate between them
-        // put objects in a list and assign numbers to make it as a loop of (int i = 0; i < n; i++;) where n is max target attributed number
-        // if (current position == target && target != n) -> target = next target
-
-        if (agent.transform.position == targetObj.transform.position)
+        if (agent.remainingDistance < 0.3f)
         {
             switch (sense)
             {
                 // Clock-wise
                 case 0:
-
-
+                    targetNum--;
+                    if (targetNum < 0)    targetNum = 3;
+                    
+                    changeTarget();
+                   
                     break;
 
                 //Counterclock-wise
                 case 1:
-
-
+                    targetNum++;
+                    if (targetNum > 3)    targetNum = 0;
+                    
+                    changeTarget();
+                    
                     break;
             }
+            
+            agent.destination = targetObj.transform.position;
         }
         
     }
