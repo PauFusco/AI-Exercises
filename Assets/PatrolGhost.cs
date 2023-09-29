@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class PatrolGhost : MonoBehaviour
 {
-    Patroller patrolScript;
-
     public NavMeshAgent ghostAgent;
     public NavMeshAgent patrolAgent;
 
@@ -39,7 +35,7 @@ public class PatrolGhost : MonoBehaviour
         
         if (patrolWP < 0) patrolWP = waypoints.Length - 1;
         if (patrolWP > waypoints.Length) patrolWP %= waypoints.Length;
-        
+
         Seek(waypoints[patrolWP].transform.position);
     }
     private void Start()
@@ -47,7 +43,6 @@ public class PatrolGhost : MonoBehaviour
         patrolWP = Random.Range(0, 4);
         direction = Random.Range(0, 2);
     }
-    
     private void Update()
     {
         if (!ghostAgent.pathPending && ghostAgent.remainingDistance < 0.5f) Patrol();
