@@ -6,8 +6,8 @@ public class Wander : MonoBehaviour
 {
     
     // parameters: float radius, offset;
-    float radius = 1;
-    float offset = 1;
+    public float radius = 1;
+    public float offset = 1;
     
     public UnityEngine.AI.NavMeshAgent agent;
     
