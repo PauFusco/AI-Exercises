@@ -297,7 +297,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: b6e7b1ec3645fa142a42b2c9fe7394e1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -686,7 +686,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e2dcc0ffab1286546b1092a7eb0998f0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -743,7 +743,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d38b6bd6d11076e429a772ef0148447d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 1218462182}
+  patrolAgent: {fileID: 1218462182}
+  ghostAgent: {fileID: 1255305150}
 --- !u!195 &1218462182
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -799,7 +800,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4de3832a4f1fef540b8f78eeaab3b6dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 1255305150}
+  ghostAgent: {fileID: 1255305150}
+  patrolAgent: {fileID: 1218462182}
+  waypoints:
+  - {fileID: 1806011543}
+  - {fileID: 607235732}
+  - {fileID: 1913545668}
+  - {fileID: 1707142469}
 --- !u!195 &1255305150
 NavMeshAgent:
   m_ObjectHideFlags: 0

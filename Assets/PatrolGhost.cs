@@ -1,103 +1,57 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PatrolGhost : MonoBehaviour
 {
-    Patroller PatrolClass;
+    Patroller patrolScript;
 
-    public UnityEngine.AI.NavMeshAgent agent;
+    public NavMeshAgent ghostAgent;
+    public NavMeshAgent patrolAgent;
 
-    UnityEngine.AI.NavMeshAgent patrolagent;
+    public GameObject[] waypoints;
+    int patrolWP;
+    int direction;
     
-    GameObject targetObj;
-    
-    GameObject patroller;
-
-    GameObject GObjA;
-    GameObject GObjB;
-    GameObject GObjC;
-    GameObject GObjD;
-
-    int sense;
-    int targetNum;
-    float d;
-    void changeTarget()
+    void Seek(Vector3 WPpos)
     {
-        switch (targetNum)
+        ghostAgent.destination = WPpos;
+    }
+    void SeekSwitch()
+    {
+        if (patrolAgent.remainingDistance > 10) ghostAgent.isStopped = true;
+        else ghostAgent.isStopped = false;
+    }
+    void Patrol()
+    {
+        int dirNum = -1;
+        switch (direction)
         {
             case 0:
-                targetObj = GObjA;
+                dirNum = 1;
                 break;
             case 1:
-                targetObj = GObjB;
-                break;
-            case 2:
-                targetObj = GObjC;
-                break;
-            case 3:
-                targetObj = GObjD;
+                dirNum = -1;
                 break;
         }
-    }
-    void Start()
-    {
-        patrolagent = PatrolClass.agent;
-
-        GObjA = GameObject.Find("WP A");
-        GObjB = GameObject.Find("WP B");
-        GObjC = GameObject.Find("WP C");
-        GObjD = GameObject.Find("WP D");
-
-        patroller = GameObject.Find("Patroller");
-
-        targetNum = Random.Range(0, 4);
-        sense = Random.Range(0, 2);
-
-        changeTarget();
-
-        agent.destination = targetObj.transform.position;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        patrolagent.remainingDistance;
-
-        if (d > 1.0f)
-        {
-            agent.isStopped = true;
-        }
-        if (d < 1.0f)
-        {
-            agent.isStopped = false;
-        }
-
-        if (agent.remainingDistance < 0.3f)
-        {
-            switch (sense)
-            {
-                // Clock-wise
-                case 0:
-                    targetNum--;
-                    if (targetNum < 0)    targetNum = 3;
-                    
-                    changeTarget();
-                   
-                    break;
-
-                //Counterclock-wise
-                case 1:
-                    targetNum++;
-                    if (targetNum > 3)    targetNum = 0;
-                    
-                    changeTarget();
-                    
-                    break;
-            }
-            
-            agent.destination = targetObj.transform.position;
-        }
+        patrolWP = (patrolWP + dirNum);
         
+        if (patrolWP < 0) patrolWP = waypoints.Length - 1;
+        if (patrolWP > waypoints.Length) patrolWP %= waypoints.Length;
+        
+        Seek(waypoints[patrolWP].transform.position);
+    }
+    private void Start()
+    {
+        patrolWP = Random.Range(0, 4);
+        direction = Random.Range(0, 2);
+    }
+    
+    private void Update()
+    {
+        if (!ghostAgent.pathPending && ghostAgent.remainingDistance < 0.5f) Patrol();
+        
+        SeekSwitch();
     }
 }

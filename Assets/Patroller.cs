@@ -1,19 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Patroller : MonoBehaviour
 {
-    public UnityEngine.AI.NavMeshAgent agent;
-    
-    GameObject guide;
+    PatrolGhost ghostScript;
+
+    public NavMeshAgent patrolAgent;
+    public NavMeshAgent ghostAgent;
     
     void Start()
     {
-        guide = GameObject.Find("Patrol Guide");
     }
     void Update()
     {
-        agent.destination = guide.transform.position;
+        patrolAgent.destination = ghostAgent.transform.position;
     }
 }
