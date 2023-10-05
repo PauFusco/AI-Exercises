@@ -5,6 +5,7 @@ using UnityEngine;
 public class Flocking : MonoBehaviour
 {
     public GameObject fishPrefab;
+    public GameObject fishManager;
 
     public int numFish;
     public GameObject[] allFish;
@@ -19,7 +20,7 @@ public class Flocking : MonoBehaviour
             Vector3 randomize = ; // random vector direction
             allFish[i] = (GameObject)Instantiate(fishPrefab, pos,
                                 Quaternion.LookRotation(randomize));
-            allFish[i].GetComponent<Flocking>().myManager = this;
+            allFish[i].GetComponent<Flocking>().fishManager = this;
         }
     }
     // Update is called once per frame
