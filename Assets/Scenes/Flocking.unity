@@ -411,6 +411,7 @@ GameObject:
   - component: {fileID: 1579190643}
   - component: {fileID: 1579190642}
   - component: {fileID: 1579190641}
+  - component: {fileID: 1579190645}
   m_Layer: 0
   m_Name: fish_Manager
   m_TagString: Untagged
@@ -495,8 +496,38 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1579190645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1579190640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5f2d6b99404a864ab3a1c9cd9699c23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flock: {fileID: 451880600679161807}
+  fishPrefab: {fileID: 451880600679161806}
+  numFish: 10
+  allFish:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  neighbourDistance: 1
+  minSpeed: 1
+  maxSpeed: 5
+  direction: {x: 0, y: 0, z: 0}
 --- !u!1001 &451880600679161805
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -510,7 +541,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6023521769458972846, guid: 29265cbfb935e54479485db8c5ce2792, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6023521769458972846, guid: 29265cbfb935e54479485db8c5ce2792, type: 3}
       propertyPath: m_LocalPosition.x
@@ -571,3 +602,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c540561037fa3f4faa234950b386bab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fManager: {fileID: 1579190645}
+  speed: 1
