@@ -4,51 +4,41 @@ using UnityEngine;
 
 public class Flock_Manager : MonoBehaviour
 {
-    public Flocking flock;
-    public GameObject fishPrefab;
 
-    public int numFish = 10;
-    public GameObject[] allFish;
+	public GameObject fishPrefab;
+	public int numFish = 20;
+	public GameObject[] allFish;
+	public Vector3 swimLimits = new Vector3(5, 5, 5);
 
-    public float neighbourDistance = 0.5f;
+	[Header("Fish Settings")]
+	[Range(0.0f, 5.0f)]
+	public float minSpeed;
+	[Range(0.0f, 5.0f)]
+	public float maxSpeed;
 
-    public float minSpeed = 1;
-    public float maxSpeed = 5;
+	[Range(1.0f, 10.0f)]
+	public float neighbourDistance;
+	[Range(0.0f, 5.0f)]
+	public float rotationSpeed;
 
-    public Vector3 direction;
+	// Use this for initialization
+	void Start()
+	{
+		allFish = new GameObject[numFish];
+		for (int i = 0; i < numFish; i++)
+		{
+			Vector3 pos = this.transform.position + new Vector3(Random.Range(-swimLimits.x, swimLimits.x),
+																  Random.Range(-swimLimits.y, swimLimits.y),
+																  Random.Range(-swimLimits.z, swimLimits.z));
+			allFish[i] = (GameObject)Instantiate(fishPrefab, pos, Quaternion.identity);
+			allFish[i].GetComponent<Flocking>().Flock_Manager = this;
+		}
 
-    Vector3 SetRandomVector()
-    {
-        Vector3 randVec;
-        int x, y, z;
+	}
 
-        x = Random.Range(-2, 3);
-        y = Random.Range(-2, 3);
-        z = Random.Range(-2, 3);
-        randVec.x = x;
-        randVec.y = y;
-        randVec.z = z;
+	// Update is called once per frame
+	void Update()
+	{
 
-        return randVec;
-    }
-
-    void Start()
-    {
-        direction = SetRandomVector();
-    }
-
-    void Update()
-    {
-        allFish = new GameObject[numFish];
-        for (int i = 0; i < numFish; ++i)
-        {
-            Vector3 pos = this.transform.position + SetRandomVector(); // random position
-            Vector3 randomize = SetRandomVector(); // random vector direction
-
-            allFish[i] = (GameObject)Instantiate(fishPrefab, pos,
-                                Quaternion.LookRotation(randomize));
-
-            allFish[i].GetComponent<Flocking>().fManager = this;
-        }
-    }
+	}
 }
