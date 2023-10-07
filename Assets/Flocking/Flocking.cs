@@ -16,7 +16,6 @@ public class Flocking : MonoBehaviour
 	{
 		speed = Random.Range(Flock_Manager.minSpeed,
 								Flock_Manager.maxSpeed);
-
 	}
 	// Update is called once per frame
 	void Update()
@@ -87,6 +86,14 @@ public class Flocking : MonoBehaviour
 								  (distance * distance);
 			}
 		}
+		
 		direction = (cohesion + align + separation).normalized * speed;
+		if (direction == Vector3.zero)
+        {
+			direction.x = 1;
+			direction.y = 1;
+			direction.z = 1;
+
+        }
 	}
 }

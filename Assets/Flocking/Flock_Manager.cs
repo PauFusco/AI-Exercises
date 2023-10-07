@@ -8,12 +8,12 @@ public class Flock_Manager : MonoBehaviour
 	public GameObject fishPrefab;
 	public int numFish = 20;
 	public GameObject[] allFish;
-	public Vector3 swimLimits = new Vector3(5, 5, 5);
+	public Vector3 swimLimits = new Vector3(1, 1, 1);
 
 	[Header("Fish Settings")]
-	[Range(0.0f, 5.0f)]
+	[Range(1.0f, 5.0f)]
 	public float minSpeed;
-	[Range(0.0f, 5.0f)]
+	[Range(1.0f, 5.0f)]
 	public float maxSpeed;
 
 	[Range(1.0f, 10.0f)]
