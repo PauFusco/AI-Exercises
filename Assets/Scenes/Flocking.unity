@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: b3d753d12434cbf4584c5e4f623fcf52, type: 2}
+  m_NavMeshData: {fileID: 0}
 --- !u!1 &1133933315
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,10 +413,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishPrefab: {fileID: 2145410191033580901, guid: 29265cbfb935e54479485db8c5ce2792, type: 3}
-  numFish: 10
+  numFish: 20
   allFish: []
   swimLimits: {x: 1, y: 1, z: 1}
-  minSpeed: 0.77
-  maxSpeed: 3.39
-  neighbourDistance: 7.61
-  rotationSpeed: 3.73
+  minSpeed: 1.29
+  maxSpeed: 2.83
+  neighbourDistance: 7.95
+  rotationSpeed: 2.49

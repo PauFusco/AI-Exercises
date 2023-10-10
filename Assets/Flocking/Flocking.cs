@@ -8,7 +8,7 @@ public class Flocking : MonoBehaviour
 	float speed;
 	float timeMin = 0.3f;
 	float timeMax = 0.8f;
-	float waitTime = 0.5f;
+	float waitTime = 0.0f;
 
 	private Vector3 direction;
 
