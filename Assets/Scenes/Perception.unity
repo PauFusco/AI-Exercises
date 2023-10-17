@@ -713,7 +713,7 @@ MonoBehaviour:
   ZombiePreFab: {fileID: 4507335567640691609, guid: 76890f996d5fa7a4ab7012aa4f316a91, type: 3}
   numZoms: 5
   allZoms: []
-  spawnLimits: {x: 1, y: 1, z: 1}
+  spawnLimits: {x: 0.1, y: 0.1, z: 0.1}
   neighbourDistance: 2
 --- !u!4 &1074769453
 Transform:
