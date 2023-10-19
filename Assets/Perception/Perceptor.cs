@@ -49,10 +49,9 @@ public class Perceptor : MonoBehaviour
                 if (Physics.Raycast(ray, out hit, frustum.farClipPlane, mask))
                     if (hit.collider.gameObject.CompareTag("Wander"))
                     {
-                        gameObject.BroadcastMessage("followFarmer", hit.collider.gameObject);
+                        perceptorManager.BroadCast(hit.collider.gameObject);
                         Debug.Log("Wander in frustum");
                     }
-                // Your code!!
             }
         }
     }
