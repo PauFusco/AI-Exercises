@@ -10,7 +10,7 @@ public class Perceptor : MonoBehaviour
     public LayerMask mask;
     public class PerceptionEvent
     {
-        public enum senses { VISION, SOUND };
+        public enum senses { VISION };
         public enum types { NEW, LOST };
         public enum threatLvls { FRIEND, SUS, THREAT }
         public GameObject gObj;
