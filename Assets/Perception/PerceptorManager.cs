@@ -5,14 +5,13 @@ using UnityEngine;
 public class PerceptorManager : MonoBehaviour
 {
     public GameObject ZombiePreFab;
-    public int numZoms = 20;
+    public int numZoms;
     public GameObject[] allZoms;
     public Vector3 spawnLimits = new Vector3(1, 1, 1);
 
     [Range(1.0f, 10.0f)]
     public float neighbourDistance;
 
-    // Use this for initialization
     void Start()
     {
         allZoms = new GameObject[numZoms];
@@ -26,12 +25,6 @@ public class PerceptorManager : MonoBehaviour
 
             allZoms[i].transform.SetParent(this.transform);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public void BroadCast(GameObject target)

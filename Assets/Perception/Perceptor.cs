@@ -23,18 +23,27 @@ public class Perceptor : MonoBehaviour
 
     Vector3 tempTarget;
     Vector3 worldTarget;
+    public bool following = false;
 
-    // Start is called before the first frame update
+    float timeMin = 0.3f;
+    float timeMax = 0.8f;
+    float waitTime = 0.0f;
+
+    public float radius = 1;
+    public float offset = 1;
+
+    private UnityEngine.AI.NavMeshHit hat;
+
     void Start()
     {
         gameObject.tag = "Zombie";
     }
-
-    // Update is called once per frame
     void Update()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, frustum.farClipPlane, mask);
         Plane[] planes = GeometryUtility.CalculateFrustumPlanes(frustum);
+
+        following = false;
 
         foreach (Collider col in colliders)
         {
@@ -50,8 +59,23 @@ public class Perceptor : MonoBehaviour
                     if (hit.collider.gameObject.CompareTag("Wander"))
                     {
                         perceptorManager.BroadCast(hit.collider.gameObject);
-                        Debug.Log("Wander in frustum");
+                        following = true;
                     }
+            }
+        }
+        if (!following)
+        {
+            waitTime -= Time.deltaTime;
+
+            if (waitTime <= 0.0f)
+            {
+                tempTarget = UnityEngine.Random.insideUnitCircle * radius;
+                tempTarget += new Vector3(0, 0, offset);
+                worldTarget = transform.TransformPoint(tempTarget);
+                worldTarget.y = 0f;
+                if (UnityEngine.AI.NavMesh.SamplePosition(worldTarget, out hat, 1.0f, UnityEngine.AI.NavMesh.AllAreas)) agent.destination = hat.position;
+
+                waitTime = Random.Range(timeMin, timeMax);
             }
         }
     }
@@ -59,5 +83,4 @@ public class Perceptor : MonoBehaviour
     {
         agent.destination = farmer.transform.position;
     }
-
 }

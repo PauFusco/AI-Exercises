@@ -539,7 +539,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 515766551}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.14, y: 0.5, z: -3.98}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
@@ -557,7 +557,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 0.56
+  m_Speed: 0.6
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -578,12 +578,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 515766551}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d09b121bc54e83e498ba9fab2cbc9972, type: 3}
+  m_Script: {fileID: 11500000, guid: a53c36191c850554c9d17034d42fdfa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1.89
-  offset: 2.24
+  radius: 1
+  offset: 1
   agent: {fileID: 515766556}
+  Zombie: {fileID: 4507335567640691603, guid: 76890f996d5fa7a4ab7012aa4f316a91, type: 3}
 --- !u!1 &627391658
 GameObject:
   m_ObjectHideFlags: 0
