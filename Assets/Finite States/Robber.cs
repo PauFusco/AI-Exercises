@@ -7,7 +7,6 @@ public class Robber : MonoBehaviour
 {
     public NavMeshAgent Policeman;
 
-    public Transform cop;
     public GameObject treasure;
     public float dist2Steal = 10f;
     Moves moves;
@@ -34,7 +33,7 @@ public class Robber : MonoBehaviour
     {
         Debug.Log("Wander state");
 
-        while (Vector3.Distance(cop.position, treasure.transform.position) < dist2Steal)
+        while (Vector3.Distance(Policeman.transform.position, treasure.transform.position) < dist2Steal)
         {
             moves.Wander();
             yield return wait;
@@ -51,7 +50,7 @@ public class Robber : MonoBehaviour
         moves.Seek(treasure.transform.position);
 
         bool stolen = false;
-        while (Vector3.Distance(cop.position, treasure.transform.position) > dist2Steal)
+        while (Vector3.Distance(Policeman.transform.position, treasure.transform.position) > dist2Steal)
         {
             if (Vector3.Distance(treasure.transform.position, transform.position) < 2f)
             {

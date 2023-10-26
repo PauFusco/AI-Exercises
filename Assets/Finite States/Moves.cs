@@ -6,18 +6,18 @@ public class Moves : MonoBehaviour
 {
     // Behaviour function
 
-    void Wander()
+    public void Wander()
     {
-
+        Debug.Log("Wander active");
     }
 
-    void Seek()
+    public void Seek(Vector3 position)
     {
-
+        Debug.Log("Seek active");
     }
 
-    void Hide()
+    public void Hide()
     {
-
+        Debug.Log("Hide active");
     }
 }
