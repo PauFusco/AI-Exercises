@@ -8,80 +8,92 @@ public class Robber : MonoBehaviour
     public NavMeshAgent Policeman;
 
     public GameObject treasure;
-    public float dist2Steal = 10f;
+    float dist2Steal = 1f;
+    float dist2Cop = 7f;
     Moves moves;
     NavMeshAgent agent;
 
+    bool stolen = false;
+
     private WaitForSeconds wait = new WaitForSeconds(0.05f); // == 1/20
     delegate IEnumerator State();
-    private State state;
+    private States state;
 
-    IEnumerator Start()
+    enum States
+    {
+        Wander,
+        Seek,
+        Hide
+    }
+
+    void Start()
     {
         moves = gameObject.GetComponent<Moves>();
-        agent = gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>();
+        agent = gameObject.GetComponent<NavMeshAgent>();
 
-        yield return wait;
+        agent.speed = 1.5f;
 
-        state = Wander;
+        state = States.Wander;
 
-        while (enabled)
-            yield return StartCoroutine(state());
+        StartCoroutine(switchState());
+    }
+    IEnumerator switchState()
+    {
+        while (true)
+        {
+            switch (state)
+            {
+                case States.Wander:
+                    Debug.Log("Wander state");
+                    state = IsGuarded() ? States.Wander : States.Seek;
+
+                    yield return Wander();
+                    break;
+
+                case States.Seek:
+                    Debug.Log("Approaching state");
+                    state = IsGuarded() ? States.Wander : States.Seek;
+                    if (CanSteal() && !stolen)
+                    {
+                        Debug.Log("Can steal");
+                        treasure.SetActive(false);
+                        state = States.Hide;
+                    }
+                    yield return Approaching();
+                    break;
+
+                case States.Hide:
+                    Debug.Log("Hiding state");
+                    agent.speed = 2f;
+                    yield return Hiding();
+                    break;
+            }
+            yield return switchState();
+        }
     }
 
     IEnumerator Wander()
     {
-        Debug.Log("Wander state");
-
-        while (Vector3.Distance(Policeman.transform.position, treasure.transform.position) < dist2Steal)
-        {
-            moves.Wander();
-            yield return wait;
-        };
-
-        state = Approaching;
+        moves.Wander();
+        yield return null;
     }
-
     IEnumerator Approaching()
     {
-        Debug.Log("Approaching state");
-
-        agent.speed = 2f;
         moves.Seek(treasure.transform.position);
-
-        bool stolen = false;
-        while (Vector3.Distance(Policeman.transform.position, treasure.transform.position) > dist2Steal)
-        {
-            if (Vector3.Distance(treasure.transform.position, transform.position) < 2f)
-            {
-                stolen = true;
-                break;
-            };
-            yield return wait;
-        };
-
-        if (stolen)
-        {
-            treasure.GetComponent<Renderer>().enabled = false;
-            Debug.Log("Stolen");
-            state = Hiding;
-        }
-        else
-        {
-            agent.speed = 1f;
-            state = Wander;
-        }
+        yield return null;
     }
-
-
     IEnumerator Hiding()
     {
-        Debug.Log("Hiding state");
+        moves.Hide(Policeman);
+        yield return null;
+    }
 
-        while (true)
-        {
-            moves.Hide();
-            yield return wait;
-        };
+    bool IsGuarded()
+    {
+        return (Vector3.Distance(Policeman.transform.position, treasure.transform.position) <= dist2Cop);
+    }
+    bool CanSteal()
+    {
+        return (Vector3.Distance(agent.transform.position, treasure.transform.position) <= dist2Steal);
     }
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Wander
   - Zombie
+  - Obstacle
   layers:
   - Default
   - TransparentFX

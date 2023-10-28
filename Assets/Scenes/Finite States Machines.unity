@@ -327,8 +327,9 @@ GameObject:
   - component: {fileID: 271350335}
   - component: {fileID: 271350334}
   - component: {fileID: 271350333}
-  - component: {fileID: 271350332}
   - component: {fileID: 271350337}
+  - component: {fileID: 271350332}
+  - component: {fileID: 271350338}
   m_Layer: 0
   m_Name: Robber
   m_TagString: Untagged
@@ -350,7 +351,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Policeman: {fileID: 1255146489}
   treasure: {fileID: 514182780}
-  dist2Steal: 2
 --- !u!136 &271350333
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -452,6 +452,27 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &271350338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271350331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c79d823c7a391f44a842b2e3c64d5d2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 271350337}
+  objective: {fileID: 514182780}
+  obstacles:
+  - {fileID: 626857917}
+  - {fileID: 1767843138}
+  - {fileID: 1053359827}
+  - {fileID: 1425892668}
+  - {fileID: 1043691444}
+  - {fileID: 1185033284}
 --- !u!1 &514182780
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,7 +584,7 @@ GameObject:
   - component: {fileID: 626857918}
   m_Layer: 0
   m_Name: Obstacle A
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -953,7 +974,7 @@ GameObject:
   - component: {fileID: 1053359828}
   m_Layer: 0
   m_Name: Obstacle C
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -1123,7 +1144,7 @@ GameObject:
   - component: {fileID: 1185033285}
   m_Layer: 0
   m_Name: Obstacle F
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -1218,7 +1239,6 @@ GameObject:
   - component: {fileID: 1255146487}
   - component: {fileID: 1255146486}
   - component: {fileID: 1255146485}
-  - component: {fileID: 1255146484}
   - component: {fileID: 1255146489}
   - component: {fileID: 1255146490}
   m_Layer: 0
@@ -1228,21 +1248,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1255146484
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1255146483}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae09e1a7ee3f8694287435363b92f22d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Policeman: {fileID: 1255146489}
-  treasure: {fileID: 514182780}
-  dist2Steal: 10
 --- !u!136 &1255146485
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1597,7 +1602,7 @@ GameObject:
   - component: {fileID: 1425892669}
   m_Layer: 0
   m_Name: Obstacle D
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -1792,7 +1797,7 @@ GameObject:
   - component: {fileID: 1767843139}
   m_Layer: 0
   m_Name: Obstacle B
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
