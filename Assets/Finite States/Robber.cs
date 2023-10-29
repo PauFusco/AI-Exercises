@@ -9,7 +9,7 @@ public class Robber : MonoBehaviour
 
     public GameObject treasure;
     float dist2Steal = 1f;
-    float dist2Cop = 7f;
+    float dist2Cop = 5f;
     Moves moves;
     NavMeshAgent agent;
 
