@@ -3,12 +3,12 @@ using UnityEngine.AI;
 
 public class Moves : MonoBehaviour
 {
-    float radius = 1;
-    float offset = 1;
+    private float radius = 1;
+    private float offset = 1;
 
-    NavMeshHit hit;
-    Vector3 tempTarget;
-    Vector3 worldTarget;
+    private NavMeshHit hit;
+    private Vector3 tempTarget;
+    private Vector3 worldTarget;
 
     public NavMeshAgent agent;
     public GameObject objective;
@@ -29,7 +29,7 @@ public class Moves : MonoBehaviour
         agent.destination = position;
     }
 
-    public void Hide(NavMeshAgent hideFrom)
+    public Vector3 Hide(NavMeshAgent hideFrom)
     {
         GameObject closestObj = null;
         float closestDist = -1;
@@ -46,6 +46,8 @@ public class Moves : MonoBehaviour
         // Compute position at the other side of closest object from police
         float RelDist = 1.65f / closestDist;
         Vector3 lerpPoint = Vector3.Lerp(closestObj.transform.position, hideFrom.transform.position, RelDist);
-        agent.destination = closestObj.transform.position + (closestObj.transform.position - lerpPoint);
+        //agent.destination = closestObj.transform.position + (closestObj.transform.position - lerpPoint);
+
+        return closestObj.transform.position + (closestObj.transform.position - lerpPoint);
     }
 }
