@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class Formation_Manager : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class Formation_Manager : MonoBehaviour
 
     [Header("Formant Settings")]
     [Range(1.0f, 5.0f)]
-    private float formantDistance = 2.0f;
+    public float formantDistance = 1.5f;
 
     public float FormantRowNumber = 3;
 
@@ -19,22 +20,25 @@ public class Formation_Manager : MonoBehaviour
     private void Start()
     {
         Vector3 leaderPos = leader.agent.transform.position;
-        float y = leaderPos.y;
-        Vector3 pos = new Vector3(0, y, leaderPos.z);
+        Vector3 pos = new Vector3(0, leaderPos.y, 0);
         allFormants = new GameObject[numFormant];
 
-        float z = leaderPos.z - (formantDistance * numFormant % FormantRowNumber);
+        int n = 0;
 
-        for (int i = 0; i < numFormant; i++)
+        for (int i = -1; i <= 1; i++)
         {
-            if (z > formantDistance * (numFormant % FormantRowNumber)) pos.x += formantDistance;
+            pos.x = leaderPos.x + i * formantDistance;
 
-            pos.z = z;
-
-            allFormants[i] = (GameObject)Instantiate(formant, pos, Quaternion.identity);
-            allFormants[i].GetComponent<FormantBehaviour>().leader = leader;
-
-            z += formantDistance;
+            for (int j = -2; j <= 0; j++)
+            {
+                pos.z = leaderPos.z - j * formantDistance;
+                if (leaderPos.x != pos.x || leaderPos.z != pos.z)
+                {
+                    allFormants[n] = (GameObject)Instantiate(formant, pos, Quaternion.identity);
+                    allFormants[n].GetComponent<FormantBehaviour>().leader = leader;
+                    n++;
+                }
+            }
         }
     }
 }
