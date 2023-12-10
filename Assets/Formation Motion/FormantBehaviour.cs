@@ -22,6 +22,7 @@ public class FormantBehaviour : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        agent.speed = (agent.destination - transform.position).magnitude + 2;
         agent.destination = leader.transform.position + trueDistance;
         transform.rotation = leader.transform.rotation;
     }
